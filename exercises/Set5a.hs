@@ -13,7 +13,7 @@ import Mooc.Todo
 --
 -- The constructors don't need any fields.
 
-data Vehicle = Bike | Bus | Tram | Train 
+data Vehicle = Bike | Bus | Tram | Train
 
 ------------------------------------------------------------------------------
 -- Ex 2: Define the type BusTicket that can represent values like these:
@@ -76,11 +76,11 @@ fred = PersonUndefined "Fred" 90
 
 -- getName returns the name of the person
 getName :: Person -> String
-getName  = name 
+getName  = name
 
 -- getAge returns the age of the person
 getAge :: Person -> Int
-getAge  = age 
+getAge  = age
 
 -- setName takes a person and returns a new person with the name changed
 setName :: String -> Person -> Person
@@ -164,7 +164,7 @@ zero = Uppies 0
 
 -- get returns the counter value
 get :: UpDown -> Int
-get ud = (val ud)
+get  = val
 
 -- tick increases an increasing counter by one or decreases a
 -- decreasing counter by one
@@ -217,7 +217,7 @@ rgb (Invert col) = map (1.0 - ) (rgb col)
 
 
 mixer (x:xs) (y:ys) = ( (x+y)/ 2.0):mixer xs ys
-mixer _ _ = [] 
+mixer _ _ = []
 -----------------------------------------------------------------------------
 -- Ex 9: define a parameterized datatype OneOrTwo that contains one or
 -- two values of the given type. The constructors should be called One and Two.
@@ -251,11 +251,10 @@ data KeyVals k v = Empty | Pair k v (KeyVals k v)
 
 toList :: KeyVals k v -> [(k,v)]
 toList (Pair k v kv) = (k,v):toList kv
-toList Empty = [] 
+toList Empty = []
 
 fromList :: [(k,v)] -> KeyVals k v
-fromList (x:xs) =  Pair (fst x) (snd x) (fromList xs)
-fromList [] = Empty 
+fromList = foldr (uncurry Pair) Empty
 
 ------------------------------------------------------------------------------
 -- Ex 11: The data type Nat is the so called Peano
@@ -276,7 +275,7 @@ fromNat (PlusOne n) = 1+fromNat n
 fromNat Zero = 0
 
 toNat :: Int -> Maybe Nat
-toNat z 
+toNat z
   | z < 0 = Nothing
   | z >= 0 = Just (recursor z)
   | otherwise = Nothing
@@ -357,7 +356,7 @@ fromBin' (I b) d = 2^d + fromBin' b (d+1)
 toBin :: Int -> Bin
 toBin n = toBin' n 0 End
 
-toBin' n d b 
+toBin' n d b
   | n == 0 = O End
   | n == d = b
   | otherwise = toBin' n (d+1) (inc b)
